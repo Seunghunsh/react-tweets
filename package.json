@@ -16,7 +16,9 @@
     "express-handlebars": "~1.1.0",
     "mongoose": "^4.2.6",
     "node-jsx": "~0.12.4",
-    "react": "~0.14.6",
+    "ntwitter": "^0.5.0",
+    "react": "^0.14.8",
+    "react-dom": "^15.3.2",
     "socket.io": "^1.1.0",
     "twitter": "^1.2.0"
   },

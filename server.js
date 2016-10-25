@@ -3,7 +3,7 @@ var express = require('express'),
   exphbs = require('express-handlebars'),
   http = require('http'),
   mongoose = require('mongoose'),
-  twitter = require('twitter'),
+  twitter = require('ntwitter'),
   routes = require('./routes'),
   config = require('./config'),
   streamHandler = require('./utils/streamHandler');
@@ -21,6 +21,12 @@ app.disable('etag');
 
 // Connect to our mongo database
 mongoose.connect('mongodb://localhost/react-tweets');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+	console.log("mongodb connected");
+});
+
 
 // Create a new ntwitter instance
 var twit = new twitter(config.twitter);
@@ -43,6 +49,6 @@ var server = http.createServer(app).listen(port, function() {
 var io = require('socket.io').listen(server);
 
 // Set a stream listener for tweets matching tracking keywords
-twit.stream('statuses/filter',{ track: 'javascript'}, function(stream){
+twit.stream('statuses/filter',{ track: 'seunghun'}, function(stream){
   streamHandler(stream,io);
 });
